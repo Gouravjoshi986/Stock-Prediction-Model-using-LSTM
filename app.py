@@ -75,3 +75,4 @@ if start_prediction:
 
     st.table(predicted_values_df)
     #st.write("Predicted values for the next 30 days:", out.flatten())
+#
