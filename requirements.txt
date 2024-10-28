@@ -3,6 +3,5 @@ numpy
 tensorflow
 streamlit
 keras
-math
 scikit-learn
 pickle-mixin
