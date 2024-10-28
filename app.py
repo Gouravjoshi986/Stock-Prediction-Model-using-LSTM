@@ -5,13 +5,13 @@ import pickle
 import matplotlib.pyplot as plt
 
 # Load the model and scaler
-with open("C:/Users/gourav/Desktop/PROGRAMMING LANGUAGES/stock_prediction_model/stock_model.sav", "rb") as model_file:
+with open("stock_model.sav", "rb") as model_file:
     model = pickle.load(model_file)
     
-with open("C:/Users/gourav/Desktop/PROGRAMMING LANGUAGES/stock_prediction_model/scaler.sav", "rb") as scaler_file:
+with open("scaler.sav", "rb") as scaler_file:
     scaler = pickle.load(scaler_file)
 
-filepath = "C:/Users/gourav/Desktop/PROGRAMMING LANGUAGES/stock_prediction_model/dataset/NvidiaStock.csv"
+filepath = "dataset/NvidiaStock.csv"
 df = pd.read_csv(filepath,parse_dates=['date'])
 dfShow = pd.read_csv(filepath)
 dfShow = dfShow.drop(df.columns[0], axis=1)
