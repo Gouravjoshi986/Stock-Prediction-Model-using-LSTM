@@ -73,6 +73,5 @@ if start_prediction:
     # Display prediction values
     predicted_values_df = pd.DataFrame(out.flatten()).T  
 
+    st.write("Predicted values for the next 30 days:")
     st.table(predicted_values_df)
-    #st.write("Predicted values for the next 30 days:", out.flatten())
-#
