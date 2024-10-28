@@ -4,7 +4,6 @@ import pandas as pd
 import pickle
 import matplotlib.pyplot as plt
 
-# Load the model and scaler
 with open("stock_model.sav", "rb") as model_file:
     model = pickle.load(model_file)
     
@@ -20,13 +19,25 @@ data_array = scaler.fit_transform(np.array(df).reshape(-1,1))
 #df_scaled = scaler.transform(df)
 #data_array = df_scaled
 
-# Title of the app
 st.title("Stock Prediction Using LSTM Model")
 
-# Display a sample of the dataset
 st.subheader("Sample of Training Data")
 st.write(dfShow.head())  
 
+st.subheader("Training and Testing Data")
+train_size = int(len(data_array) * 0.65)  
+train_data = data_array[:train_size]
+test_data = data_array[train_size:]
+
+train_data_plot = scaler.inverse_transform(train_data)
+test_data_plot = scaler.inverse_transform(test_data)
+
+fig, ax = plt.subplots()
+ax.plot(train_data_plot, label="Training Data", color="orange")
+ax.plot(np.arange(train_size, len(df)), test_data_plot, label="Testing Data", color="green")
+ax.legend()
+
+st.pyplot(fig)
 
 st.subheader("Next 30-Day Stock Price Prediction")
 
@@ -57,20 +68,16 @@ if start_prediction:
 
     out = scaler.inverse_transform(np.array(out).reshape(-1, 1))
 
-    # Plotting
     fig, ax = plt.subplots()
     day_new = np.arange(1, 101)
     day_pred = np.arange(101, 131)
     
-    # Plot past and predicted values
     ax.plot(day_new, scaler.inverse_transform(data_array[-100:]), label="Last 100 days")
     ax.plot(day_pred, out, label="Next 30 days prediction")
     ax.legend()
     
-    # Display plot
     st.pyplot(fig)
 
-    # Display prediction values
     predicted_values_df = pd.DataFrame(out.flatten()).T  
 
     st.write("Predicted values for the next 30 days:")
