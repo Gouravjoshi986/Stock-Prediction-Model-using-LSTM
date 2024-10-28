@@ -1,6 +1,7 @@
 matplotlib
 numpy
 tensorflow
+streamlit
 keras
 math
 scikit-learn
